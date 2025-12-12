@@ -1,12 +1,28 @@
 {
   "name": "will-glas-test",
   "version": "1.0.0",
-  "description": "Sample project for code improvements",
+  "description": "Sample project demonstrating code quality improvements",
   "main": "utils.js",
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "echo \"No tests yet\" && exit 0",
+    "lint": "eslint *.js",
+    "lint:fix": "eslint *.js --fix",
+    "format": "prettier --write \"*.js\"",
+    "format:check": "prettier --check \"*.js\""
   },
-  "keywords": [],
+  "keywords": [
+    "code-quality",
+    "best-practices",
+    "security"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
 }

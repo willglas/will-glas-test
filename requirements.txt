@@ -1,3 +1,14 @@
-# No version pinning - bad practice
-requests
-flask
+# Python dependencies with version pinning for reproducible builds
+# Use 'pip freeze' to capture exact versions after testing
+
+# HTTP library
+requests>=2.31.0,<3.0.0
+
+# Web framework
+flask>=3.0.0,<4.0.0
+
+# Code quality and security tools (development dependencies)
+# Consider moving these to requirements-dev.txt
+pylint>=3.0.0,<4.0.0
+black>=23.12.0,<24.0.0
+bandit>=1.7.5,<2.0.0
