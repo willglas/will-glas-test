@@ -1,0 +1,12 @@
+{
+  "name": "will-glas-test",
+  "version": "1.0.0",
+  "description": "Sample project for code improvements",
+  "main": "utils.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
