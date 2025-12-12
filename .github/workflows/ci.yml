@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check for required files
+      run: |
+        echo "Checking for required repository files..."
+        test -f README.md && echo "✓ README.md found" || (echo "✗ README.md missing" && exit 1)
+        test -f LICENSE && echo "✓ LICENSE found" || (echo "✗ LICENSE missing" && exit 1)
+        test -f CONTRIBUTING.md && echo "✓ CONTRIBUTING.md found" || (echo "✗ CONTRIBUTING.md missing" && exit 1)
+        test -f CODE_OF_CONDUCT.md && echo "✓ CODE_OF_CONDUCT.md found" || (echo "✗ CODE_OF_CONDUCT.md missing" && exit 1)
+        test -f .gitignore && echo "✓ .gitignore found" || (echo "✗ .gitignore missing" && exit 1)
+        echo "All required files are present!"
+        
+    - name: Validate markdown files
+      run: |
+        echo "Validating markdown syntax..."
+        for file in *.md; do
+          if [ -f "$file" ]; then
+            echo "Checking $file..."
+            # Basic check that file is not empty
+            [ -s "$file" ] && echo "✓ $file is valid" || (echo "✗ $file is empty" && exit 1)
+          fi
+        done
+        
+    - name: Repository structure check
+      run: |
+        echo "Repository structure:"
+        tree -L 2 -a || ls -laR

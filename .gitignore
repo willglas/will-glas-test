@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+bower_components/
+vendor/
+
+# Build outputs
+dist/
+build/
+out/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+target/
+bin/
+obj/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+*.coverage
+.pytest_cache/
+
+# OS generated files
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
