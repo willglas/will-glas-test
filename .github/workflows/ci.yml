@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check file formatting
+      run: |
+        echo "Checking for trailing whitespace..."
+        ! git grep -I --line-number '\s$' -- '*.md' '*.yml' '*.yaml' || \
+          (echo "Found trailing whitespace in the above files" && exit 1)
+    
+    - name: Check Markdown links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        config-file: '.github/workflows/markdown-link-check-config.json'
+      continue-on-error: true
+
+  documentation:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Verify required files
+      run: |
+        echo "Checking for required documentation files..."
+        test -f README.md || (echo "README.md is missing" && exit 1)
+        test -f LICENSE || (echo "LICENSE is missing" && exit 1)
+        test -f CONTRIBUTING.md || (echo "CONTRIBUTING.md is missing" && exit 1)
+        test -f CODE_OF_CONDUCT.md || (echo "CODE_OF_CONDUCT.md is missing" && exit 1)
+        test -f SECURITY.md || (echo "SECURITY.md is missing" && exit 1)
+        echo "All required documentation files are present!"
