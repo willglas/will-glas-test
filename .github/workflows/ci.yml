@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  # Basic validation job
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check README exists
+      run: |
+        if [ ! -f README.md ]; then
+          echo "README.md not found!"
+          exit 1
+        fi
+        echo "✅ README.md exists"
+        
+    - name: Check LICENSE exists
+      run: |
+        if [ ! -f LICENSE ]; then
+          echo "LICENSE not found!"
+          exit 1
+        fi
+        echo "✅ LICENSE exists"
+        
+    - name: Validate markdown files
+      run: |
+        echo "Checking for markdown files..."
+        find . -name "*.md" -type f | while read file; do
+          echo "Found: $file"
+        done
+        echo "✅ Markdown validation complete"
+        
+  # Add more jobs here as your project grows
+  # Examples:
+  # - lint: Run linters
+  # - test: Run tests
+  # - build: Build the project
+  # - deploy: Deploy to staging/production
