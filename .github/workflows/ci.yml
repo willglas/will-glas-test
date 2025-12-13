@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    name: Validate Repository Structure
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check for required files
+      run: |
+        echo "Checking for required repository files..."
+        
+        required_files=(
+          "README.md"
+          "LICENSE"
+          "CONTRIBUTING.md"
+          "CODE_OF_CONDUCT.md"
+          "SECURITY.md"
+        )
+        
+        missing_files=()
+        
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            missing_files+=("$file")
+            echo "❌ Missing: $file"
+          else
+            echo "✅ Found: $file"
+          fi
+        done
+        
+        if [ ${#missing_files[@]} -ne 0 ]; then
+          echo ""
+          echo "Error: Missing required files"
+          exit 1
+        fi
+        
+        echo ""
+        echo "✅ All required files are present"
+    
+    - name: Validate markdown files
+      run: |
+        echo "Validating markdown files..."
+        
+        markdown_files=$(find . -name "*.md" -not -path "./node_modules/*" -not -path "./.git/*")
+        
+        for file in $markdown_files; do
+          echo "Checking $file"
+          # Basic validation - check if file is not empty
+          if [ ! -s "$file" ]; then
+            echo "❌ $file is empty"
+            exit 1
+          fi
+        done
+        
+        echo "✅ All markdown files are valid"
