@@ -13,7 +13,7 @@ This section shows which versions of the project are currently being supported w
 If you discover a security vulnerability in this project, please report it responsibly by following these steps:
 
 1. **Do not** open a public issue for the vulnerability
-2. Email the maintainer directly at [INSERT SECURITY EMAIL]
+2. Contact the maintainer directly via GitHub's private vulnerability reporting feature or create a security advisory
 3. Provide a detailed description of the vulnerability, including:
    - Steps to reproduce the issue
    - Potential impact of the vulnerability
