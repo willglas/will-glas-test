@@ -13,7 +13,7 @@ We take security seriously and aim to address security vulnerabilities promptly.
 If you discover a security vulnerability, please follow these steps:
 
 1. **Do not** open a public issue
-2. **Email** the maintainers with details of the vulnerability
+2. **Report** the vulnerability by opening a private security advisory on GitHub, or email the repository maintainer (check the repository's main page for contact information)
 3. **Include** the following information:
    - Type of vulnerability
    - Full paths of source file(s) related to the vulnerability
